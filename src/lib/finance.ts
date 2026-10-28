@@ -1,0 +1,4 @@
+export type Sale = { id:string; final_price:number; payment_status:string; created_at:string };
+export type Payment = { client_package_id:string; amount:number; paid_at:string; status:string };
+export function financialTotals(sales:Sale[], payments:Payment[]) { const receivedBySale=new Map<string,number>(); for(const p of payments) if(p.status==="paid") receivedBySale.set(p.client_package_id,(receivedBySale.get(p.client_package_id)||0)+Number(p.amount)); const sold=sales.reduce((sum,s)=>sum+Number(s.final_price),0); const received=[...receivedBySale.values()].reduce((sum,v)=>sum+v,0); return {sold,received,pending:Math.max(0,sold-received),count:sales.length,average:sales.length?sold/sales.length:0,receivedBySale}; }
+export function csvCell(value:string|number){const safe=String(value).replace(/[\r\n]+/g," ");return /^[=+\-@]/.test(safe)?`'${safe}`:safe;}

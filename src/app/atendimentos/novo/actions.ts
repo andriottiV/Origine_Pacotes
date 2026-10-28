@@ -1,0 +1,4 @@
+"use server";
+import { revalidatePath } from "next/cache";
+import { requireOrganization } from "@/lib/auth";
+export async function registerAttendance(_:unknown,formData:FormData){const {supabase}=await requireOrganization();const id=String(formData.get("packageId")||"");const note=String(formData.get("note")||"").trim()||null;const idempotencyKey=String(formData.get("idempotencyKey")||"");if(!id)return {error:"Selecione um pacote ativo."};if(!idempotencyKey)return {error:"Não foi possível preparar este atendimento. Recarregue a página."};const {data,error}=await supabase.rpc("register_service_usage_idempotent",{p_package_id:id,p_quantity:1,p_note:note,p_idempotency_key:idempotencyKey});if(error)return {error:error.message};revalidatePath("/");revalidatePath("/atendimentos/novo");return {success:`Atendimento registrado para ${data.quantity} serviço.`};}

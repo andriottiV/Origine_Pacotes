@@ -1,0 +1,130 @@
+﻿.origineLogin_page {
+  --paper: var(--brand-paper); --surface: var(--brand-surface); --ink: var(--brand-ink); --accent: var(--brand-persimmon); --action: #b94028; --butter: var(--brand-butter); --secondary: #756d77; --line: #bdb4b9; --focus: #b94028;
+  display: grid; grid-template-columns: 60% 40%; min-height: 100svh; background: var(--paper); color: var(--ink); isolation: isolate;
+}
+.origineLogin_page svg { flex-shrink: 0; stroke-width: 1.5; }
+.origineLogin_editorial { position: relative; min-height: 900px; overflow: hidden; padding: 52px 5.8%; background: var(--paper); isolation: isolate; }
+.origineLogin_editorial::after, .origineLogin_ticket::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .16; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23857962' filter='url(%23n)' opacity='.5' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
+.origineLogin_editorial::before { content: ""; position: absolute; z-index: -1; width: 530px; height: 530px; background: var(--accent); border-radius: 50%; top: -305px; right: -230px; }
+.origineLogin_orbit { position: absolute; z-index: -1; right: -25px; top: 110px; width: 185px; height: 780px; background: var(--butter); transform: rotate(-5deg); }
+.origineLogin_orbit::before { content: ""; position: absolute; top: -72px; right: 52px; width: 108px; height: 310px; border: 1.5px solid var(--ink); border-radius: 50%; transform: rotate(-31deg); }
+.origineLogin_orbit::after { content: ""; position: absolute; width: 600px; height: 400px; bottom: -300px; right: -180px; border-radius: 50%; background: var(--accent); }
+.origineLogin_headline { position: relative; z-index: 2; margin: 0; font-family: var(--login-serif), Georgia, serif; font-size: clamp(64px, 8.8vw, 150px); line-height: .96; letter-spacing: -.075em; font-weight: 650; white-space: nowrap; }
+.origineLogin_headline span { color: #c3472b; }
+.origineLogin_description { position: relative; z-index: 2; width: 36%; min-width: 245px; margin: 33px 0 0 6px; font-size: 17px; line-height: 1.6; }
+.origineLogin_benefits { position: relative; z-index: 2; margin: 30px 0 0 6px; width: 285px; }
+.origineLogin_yellowDash { display: block; width: 59px; height: 9px; margin-bottom: 31px; background: var(--butter); }
+.origineLogin_benefits p { display: flex; align-items: center; gap: 28px; margin: 0 0 28px; font-size: 14px; line-height: 1.55; }
+.origineLogin_benefits svg { width: 34px; height: 34px; }
+.origineLogin_signature { position: absolute; left: 7%; bottom: 46px; margin: 0; font-family: "Segoe Script", "Brush Script MT", cursive; font-size: 30px; font-style: italic; line-height: 1.15; transform: rotate(-12deg); }
+.origineLogin_signature span { padding-left: 20px; }
+.origineLogin_signature::after { content: ""; position: absolute; height: 5px; width: 175px; background: var(--butter); left: 8px; bottom: -10px; transform: rotate(-8deg); }
+.origineLogin_editorialFootnote { position: absolute; bottom: 26px; left: 42%; font-size: 9px; letter-spacing: .22em; transform: rotate(-7deg); }
+.origineLogin_tickets { position: absolute; left: 41%; top: 335px; width: 60%; height: 540px; }
+.origineLogin_ticket { position: absolute; width: 100%; height: 222px; border-radius: 7px; box-shadow: 0 15px 18px -10px #30233280, inset 0 0 0 1px #30233219; display: grid; grid-template-columns: 48% 27% 25%; grid-template-rows: 1fr 1fr; padding: 25px 25px 23px 30px; mask: radial-gradient(circle at 0 7px, transparent 5px, #000 5.8px) 0 0 / 100% 22px; }
+.origineLogin_persimmon { z-index: 3; background: #d65332; color: #2b1d25; transform: rotate(-14deg); top: 0; left: 1%; }
+.origineLogin_cream { z-index: 2; background: #eae1d1; color: #302332; transform: rotate(10deg); top: 180px; left: -3%; }
+.origineLogin_aubergine { z-index: 1; background: #382731; color: #e9dec9; transform: rotate(15deg); top: 327px; left: -7%; }
+.origineLogin_wordmark { display: inline-flex; flex-direction: column; width: fit-content; line-height: .9; }
+.origineLogin_wordmark > span { font-family: var(--login-serif), Georgia, serif; font-weight: 650; font-size: 64px; letter-spacing: -.075em; }
+.origineLogin_wordmark small { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 9px; font-size: 9px; font-weight: 500; letter-spacing: .43em; }
+.origineLogin_wordmark i { width: 22px; height: 4px; background: var(--accent); }
+.origineLogin_ticket .origineLogin_wordmark > span { font-size: 49px; }
+.origineLogin_ticket .origineLogin_wordmark small { font-size: 7px; letter-spacing: .4em; gap: 7px; }
+.origineLogin_ticket .origineLogin_wordmark i { background: currentColor; height: 3px; width: 18px; }
+.origineLogin_persimmon .origineLogin_wordmark { color: #f2e5c8; }
+.origineLogin_ticketSlogan { grid-row: 2; align-self: end; font-size: 10px; line-height: 1.6; letter-spacing: .2em; }
+.origineLogin_session { grid-column: 2; grid-row: 1 / 3; align-self: end; text-align: center; }
+.origineLogin_session b { font-family: var(--login-serif), Georgia, serif; font-size: 87px; font-weight: 500; letter-spacing: -.08em; line-height: 1; }
+.origineLogin_session small { display: block; font-size: 10px; letter-spacing: .28em; }
+.origineLogin_ticketNote { grid-row: 1 / 3; grid-column: 3; border-left: 1px solid currentColor; padding-left: 17px; margin-left: 12px; display: flex; flex-direction: column; justify-content: center; font-size: 8px; line-height: 1.9; letter-spacing: .16em; }
+.origineLogin_ticketNote i { width: 44px; height: 3px; margin-top: 24px; background: var(--butter); }
+.origineLogin_login { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 90px 38px 35px; background: var(--surface); }
+.origineLogin_loginContent { width: 100%; max-width: 440px; }
+.origineLogin_motto { position: absolute; top: 28px; right: 30px; margin: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 8px; letter-spacing: .23em; line-height: 1.8; }
+.origineLogin_brand { margin-bottom: 56px; }
+.origineLogin_welcome h1 { font-family: var(--login-serif), Georgia, serif; margin: 0 0 10px; font-weight: 650; letter-spacing: -.045em; font-size: clamp(29px, 3.15vw, 48px); line-height: 1.15; }
+.origineLogin_welcome p { font-size: 17px; line-height: 1.5; color: var(--secondary); margin: 0 0 30px; }
+.origineLogin_field + .origineLogin_field { margin-top: 23px; }
+.origineLogin_field label { display: block; font-size: 14px; margin-bottom: 8px; }
+.origineLogin_inputWrap { position: relative; display: flex; align-items: center; }
+.origineLogin_inputWrap > svg { position: absolute; left: 17px; width: 19px; height: 19px; color: var(--secondary); pointer-events: none; }
+.origineLogin_inputWrap input { width: 100%; min-width: 0; height: 53px; padding: 0 49px; border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--ink); font-size: 14px; }
+.origineLogin_inputWrap input::placeholder { color: var(--secondary); opacity: 1; }
+.origineLogin_visibility { position: absolute; right: 4px; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 7px; background: transparent; color: var(--secondary); }
+.origineLogin_visibility svg { width: 20px; height: 20px; }
+.origineLogin_feedback { min-height: 49px; padding: 9px 0; font-size: 12px; color: var(--action); }
+.origineLogin_submit, .origineLogin_clientLink { position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 60px; width: 100%; border-radius: 10px; font-size: 17px; font-weight: 500; text-decoration: none; }
+.origineLogin_submit { border: 1px solid var(--action); color: #fffaf4; background: var(--action); }
+.origineLogin_submit > svg, .origineLogin_clientLink > svg:last-child { position: absolute; right: 22px; width: 21px; height: 21px; }
+.origineLogin_submit:hover { background: #a63823; }
+.origineLogin_submit:disabled { opacity: .7; cursor: wait; }
+.origineLogin_separator { display: flex; align-items: center; gap: 20px; margin: 24px 0; color: var(--secondary); font-size: 14px; }
+.origineLogin_separator::before, .origineLogin_separator::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.origineLogin_clientLink { border: 1px solid var(--action); color: var(--ink); background: transparent; }
+.origineLogin_clientLink:hover { background: #d94f350a; }
+.origineLogin_clientLink > svg:first-child { width: 24px; height: 24px; }
+.origineLogin_footer { margin-top: 52px; font-size: 10px; line-height: 1.8; color: var(--secondary); }
+.origineLogin_footer span { padding: 0 8px; }
+.origineLogin_mobileEditorial { display: none; }
+.origineLogin_srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.origineLogin_page :is(a, button, input):focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+.origineLogin_page:where([data-theme="dark"] *) { --paper: #29232a; --surface: #221e24; --ink: #f2e8dc; --secondary: #c1b6bf; --line: #766873; --focus: #e8ce79; --action: #b94028; }
+.origineLogin_feedback:where([data-theme="dark"] *) { color: #ffac94; }
+@media (min-width: 1600px) { .origineLogin_editorial { min-height: 1024px; } .origineLogin_tickets { top: 385px; } .origineLogin_ticket { height: 260px; } .origineLogin_cream { top: 211px; } .origineLogin_aubergine { top: 385px; } }
+@media (max-width: 1199px) and (min-width: 901px) {
+  .origineLogin_page { grid-template-columns: 55% 45%; }
+  .origineLogin_editorial { min-height: 840px; padding-top: 60px; }
+  .origineLogin_headline { font-size: 7.9vw; }
+  .origineLogin_description { width: 75%; }
+  .origineLogin_tickets { top: 560px; left: 42%; width: 66%; }
+  .origineLogin_ticket { height: 150px; padding: 18px; }
+  .origineLogin_ticket .origineLogin_wordmark > span { font-size: 34px; }
+  .origineLogin_ticketSlogan { font-size: 7px; }
+  .origineLogin_session b { font-size: 58px; }
+  .origineLogin_ticketNote { font-size: 6px; padding-left: 8px; }
+  .origineLogin_cream { top: 115px; } .origineLogin_aubergine { display: none; }
+  .origineLogin_signature { bottom: 50px; font-size: 24px; }
+  .origineLogin_editorialFootnote { display: none; }
+  .origineLogin_login { padding-left: 30px; padding-right: 30px; }
+}
+@media (max-width: 900px) {
+  .origineLogin_page { display: block; }
+  .origineLogin_editorial { display: none; }
+  .origineLogin_login { min-height: 100svh; padding: max(48px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(30px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); }
+  .origineLogin_motto { display: none; }
+  .origineLogin_brand { margin-bottom: 23px; }
+  .origineLogin_mobileEditorial { display: block; margin: 0 0 32px; font-family: var(--login-serif), Georgia, serif; font-size: 25px; font-weight: 600; line-height: 1.2; letter-spacing: -.04em; }
+  .origineLogin_mobileEditorial span { color: var(--action); }
+  .origineLogin_welcome h1 { font-size: 37px; }
+  .origineLogin_welcome p { font-size: 16px; }
+  .origineLogin_footer { margin-top: 36px; }
+}
+@media (max-width: 380px) {
+  .origineLogin_login { padding-left: 20px; padding-right: 20px; }
+  .origineLogin_welcome h1 { font-size: 31px; }
+  .origineLogin_mobileEditorial { font-size: 21px; }
+  .origineLogin_clientLink { font-size: 15px; gap: 9px; padding-right: 22px; }
+  .origineLogin_clientLink > svg:last-child { right: 13px; }
+}
+
+
+/* Keep the visible wordmarks clear of the ticket above them. */
+.origineLogin_cream .origineLogin_wordmark, .origineLogin_aubergine .origineLogin_wordmark { grid-row: 1 / 3; align-self: center; transform: translateY(22px); }
+.origineLogin_cream .origineLogin_ticketSlogan, .origineLogin_aubergine .origineLogin_ticketSlogan { display: none; }
+.origineLogin_page { font-optical-sizing: none; }
+.origineLogin_headline, .origineLogin_wordmark > span, .origineLogin_welcome h1 { font-variation-settings: "opsz" 36; }
+.origineLogin_mobileEditorial:where([data-theme="dark"] *) span { color: #ffac94; }
+/* Functional borders meet non-text contrast, and mobile inputs avoid focus zoom. */
+.origineLogin_page { --line: #93868e; }
+.origineLogin_inputWrap input { font-size: 16px; }
+.origineLogin_tickets { filter: drop-shadow(0 12px 10px #30233240); }
+.origineLogin_ticket {
+  mask: radial-gradient(circle at 0 7px, transparent 5px, #000 5.8px) 0 0 / 100% 22px,
+        radial-gradient(circle at 100% 7px, transparent 5px, #000 5.8px) 0 0 / 100% 22px;
+  mask-composite: intersect;
+}
+@media (max-width: 1199px) and (min-width: 901px) {
+  .origineLogin_editorial { min-height: 960px; }
+  .origineLogin_tickets { top: 740px; }
+}

@@ -1,0 +1,4 @@
+"use server";
+import { revalidatePath } from "next/cache";
+import { requireOrganization } from "@/lib/auth";
+export async function recordPayment(_:unknown,formData:FormData){const {supabase}=await requireOrganization();const amount=Number(formData.get("amount"));const packageId=String(formData.get("packageId")||"");const method=String(formData.get("method")||"");const note=String(formData.get("note")||"");const key=String(formData.get("idempotencyKey")||"");if(!packageId||!key||!Number.isFinite(amount)||amount<=0||!["pix","cash","debit_card","credit_card","other"].includes(method))return {error:"Informe um valor e método válidos."};const {error}=await supabase.rpc("record_package_payment",{p_package_id:packageId,p_amount:amount,p_method:method,p_note:note||null,p_idempotency_key:key});if(error)return {error:error.message};revalidatePath("/financeiro");return {success:"Recebimento registrado."};}

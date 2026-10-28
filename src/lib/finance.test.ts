@@ -1,0 +1,2 @@
+import {describe,it,expect} from "vitest";import {csvCell,financialTotals} from "./finance";
+describe("finance",()=>{it("keeps sales distinct from receipts and calculates outstanding balance",()=>{const r=financialTotals([{id:"a",final_price:270,payment_status:"partial",created_at:""}],[{client_package_id:"a",amount:100,paid_at:"",status:"paid"}]);expect(r).toMatchObject({sold:270,received:100,pending:170,average:270});});it("protects CSV formulas",()=>expect(csvCell("=SUM(A1:A2)")).toBe("'=SUM(A1:A2)"));});
