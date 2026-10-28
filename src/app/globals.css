@@ -278,3 +278,24 @@ td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
 .selected-package p:not(.eyebrow) { margin: 0 0 8px; font-size: 13px; }
 .selected-package strong { font-family: var(--serif); font-size: 40px; line-height: 1; font-weight: 550; margin-right: 6px; }
 .selected-package small, .sale-summary small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; }
+.auth-flow-page { padding: 40px 20px; }
+.auth-flow-card { width: min(100%, 520px); }
+.auth-flow-card > .wordmark { margin-bottom: 30px; }
+.auth-flow-card h1 { font-size: clamp(30px, 3.2vw, 40px); }
+.auth-password-wrap { position: relative; }
+.field .auth-password-wrap input { padding-right: 54px; }
+.auth-password-wrap .icon-button { position: absolute; right: 3px; top: 1px; }
+.auth-password-hint { margin: 12px 0 0; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.auth-field-error { margin: 6px 0 0; color: var(--danger); font-size: 12px; }
+.auth-flow-feedback { min-height: 24px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+.auth-flow-feedback .form-message { margin-top: 0; }
+.auth-flow-card .auth-submit { margin-top: 12px; }
+.auth-flow-footer { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--border); }
+.auth-flow-footer > span { font-size: 10px; color: var(--muted); }
+.auth-switch { text-align: center; margin: 20px 0 0; }
+.origineLogin_recovery { display: flex; justify-content: flex-end; margin-top: 9px; }
+.origineLogin_recovery a { min-height: 32px; color: var(--action); text-decoration: underline; font-size: 13px; text-underline-offset: 3px; }
+.origineLogin_signup { text-align: center; margin: 20px 0 0; font-size: 13px; color: var(--secondary); }
+.origineLogin_signup a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.origineLogin_success { margin: 0 0 20px; padding: 12px; background: var(--success-bg); color: var(--success); border-radius: 7px; font-size: 13px; }
+.origineLogin_recovery:where([data-theme="dark"] *) a { color: #ffac94; }

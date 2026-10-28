@@ -47,6 +47,13 @@ describe("login presentation and authentication", () => {
     expect(screen.getByLabelText("Senha")).toHaveAttribute("aria-describedby", "login-error");
   });
 
+  it("guides the professional to email confirmation before login", async () => {
+    signIn.mockResolvedValue({ error: { code: "email_not_confirmed" } });
+    render(<LoginForm />);
+    fireEvent.submit(screen.getByRole("button", { name: "Entrar" }).closest("form")!);
+    await waitFor(() => expect(screen.getByRole("alert")).toHaveTextContent("Confirme seu e-mail antes de entrar."));
+  });
+
   it("shows configuration failures and handles connection failures without leaving the form locked", async () => {
     signIn.mockRejectedValue(new Error("offline"));
     render(<LoginForm configurationError="Configuração indisponível." />);

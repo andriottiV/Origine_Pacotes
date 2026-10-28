@@ -41,3 +41,10 @@ O destino previsto é a Vercel: importe este repositório, cadastre as mesmas va
 ## Limitações atuais
 
 O esquema de dados, RLS e função transacional foram criados localmente, mas ainda precisam ser aplicados a um projeto Supabase. Login, telas de CRUD, links seguros para a área do cliente e reconhecimento de voz dependem dessa integração e serão implementados nas próximas etapas.
+
+## Cadastro profissional e recuperação de senha
+
+As novas páginas estão implementadas em /cadastro, /esqueci-senha e /redefinir-senha.
+A ativação depende da migration e das configurações externas descritas em
+[docs/auth-setup.md](docs/auth-setup.md). Consulte esse guia antes de testar com
+usuários reais. Nenhuma migration é aplicada automaticamente pela aplicação.

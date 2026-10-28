@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run --root . src",
-    "test:watch": "vitest --root . src",
+    "test": "vitest run --configLoader runner --root . src",
+    "test:watch": "vitest --configLoader runner --root . src",
     "test:e2e": "npm run build && playwright test"
   },
   "dependencies": {

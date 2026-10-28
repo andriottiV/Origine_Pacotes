@@ -27,7 +27,7 @@ function Tickets() {
   </div>;
 }
 
-export default function LoginForm({ configurationError }: { configurationError?: string }) {
+export default function LoginForm({ configurationError, passwordUpdated = false }: { configurationError?: string; passwordUpdated?: boolean }) {
   const [error, setError] = useState(configurationError || "");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -45,8 +45,8 @@ export default function LoginForm({ configurationError }: { configurationError?:
       const { error: authError } = await createSupabaseBrowserClient().auth.signInWithPassword({
         email: String(form.get("email") || ""), password: String(form.get("password") || ""),
       });
-      if (authError) { setError("E-mail ou senha inválidos."); return; }
-      window.location.assign("/");
+      if (authError) { setError(authError.code === "email_not_confirmed" ? "Confirme seu e-mail antes de entrar. Verifique a caixa de entrada e o spam." : "E-mail ou senha inválidos."); return; }
+      window.location.assign("/auth/complete");
     } catch {
       setError("Não foi possível conectar. Verifique sua conexão e tente novamente.");
     } finally {
@@ -80,6 +80,7 @@ export default function LoginForm({ configurationError }: { configurationError?:
           <h1 id="login-title">Bem-vindo de volta</h1>
           <p>Acesse sua conta para continuar gerenciando seus pacotes e clientes.</p>
         </header>
+        {passwordUpdated && <p className="origineLogin_success" role="status">Senha atualizada. Entre com sua nova senha.</p>}
         <form onSubmit={submit} aria-busy={loading}>
           <div className={"origineLogin_field"}>
             <label htmlFor="login-email">E-mail</label>
@@ -89,12 +90,14 @@ export default function LoginForm({ configurationError }: { configurationError?:
             <label htmlFor="login-password">Senha</label>
             <div className={"origineLogin_inputWrap"}><LockKeyhole aria-hidden="true" /><input id="login-password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" placeholder="Sua senha" required aria-describedby={error ? "login-error" : undefined} /><button className={"origineLogin_visibility"} type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"} aria-pressed={showPassword}>{showPassword ? <Eye aria-hidden="true" /> : <EyeOff aria-hidden="true" />}</button></div>
           </div>
+          <div className="origineLogin_recovery"><Link href="/esqueci-senha">Esqueci minha senha</Link></div>
           <div className={"origineLogin_feedback"} id="login-error" role="alert">{error}</div>
           <button type="submit" className={"origineLogin_submit"} disabled={loading}><span>{loading ? "Entrando…" : "Entrar"}</span><ArrowRight aria-hidden="true" /></button>
           <span className={"origineLogin_srOnly"} role="status">{loading ? "Entrando. Aguarde." : ""}</span>
         </form>
         <div className={"origineLogin_separator"}><span>ou</span></div>
         <Link className={"origineLogin_clientLink"} href="/cliente/login"><UserRound aria-hidden="true" /><span>Acessar como cliente</span><ArrowRight aria-hidden="true" /></Link>
+        <p className="origineLogin_signup">Ainda não tem conta? <Link href="/cadastro">Criar minha conta</Link></p>
         <footer className={"origineLogin_footer"}>Origine Pacotes <span>—</span> Gestão simples para relacionamentos duradouros.</footer>
       </div>
     </section>
