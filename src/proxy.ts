@@ -1,12 +1,13 @@
 ﻿import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { createTimedFetch } from "./lib/performance";
 import { recoveryClaims } from "./lib/auth-flow/shared";
 
 export async function proxy(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL, key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) return NextResponse.next();
   let response = NextResponse.next({ request });
-  const supabase = createServerClient(url, key, { cookies: {
+  const supabase = createServerClient(url, key, { global: { fetch: createTimedFetch("proxy") }, cookies: {
     getAll: () => request.cookies.getAll(),
     setAll: items => {
       items.forEach(({ name, value }) => request.cookies.set(name, value));

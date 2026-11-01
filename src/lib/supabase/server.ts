@@ -1,4 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
+import { createTimedFetch } from "@/lib/performance";
 import { cookies } from "next/headers";
 
 export async function createSupabaseServerClient() {
@@ -6,7 +7,7 @@ export async function createSupabaseServerClient() {
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) throw new Error("Configuração Supabase ausente. Defina NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY.");
   const cookieStore = await cookies();
-  return createServerClient(url, key, { cookies: {
+  return createServerClient(url, key, { global: { fetch: createTimedFetch("server") }, cookies: {
     getAll: () => cookieStore.getAll(),
     setAll: (items) => { try { items.forEach(({ name, value, options }) => cookieStore.set(name, value, options)); } catch { /* Server Components only read cookies. */ } },
   }});

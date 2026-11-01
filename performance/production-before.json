@@ -1,0 +1,134 @@
+{
+  "environment": "production-before",
+  "method": "HTTP fetch to loopback, no authentication, redirects manual; elapsed includes response body; first sample reported separately, route compilation state not guaranteed cold",
+  "routes": {
+    "/login": [
+      {
+        "ms": 328.41,
+        "status": 200,
+        "bytes": 20074
+      },
+      {
+        "ms": 26.68,
+        "status": 200,
+        "bytes": 20074
+      },
+      {
+        "ms": 35.35,
+        "status": 200,
+        "bytes": 20074
+      },
+      {
+        "ms": 21.35,
+        "status": 200,
+        "bytes": 20074
+      },
+      {
+        "ms": 22.07,
+        "status": 200,
+        "bytes": 20074
+      },
+      {
+        "ms": 19.17,
+        "status": 200,
+        "bytes": 20074
+      }
+    ],
+    "/clientes": [
+      {
+        "ms": 5.99,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 4.26,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 3.43,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 3.51,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 3.12,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 3.51,
+        "status": 307,
+        "bytes": 6
+      }
+    ],
+    "/atendimentos/novo": [
+      {
+        "ms": 2.57,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 2.64,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 2.45,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 2.32,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 2.62,
+        "status": 307,
+        "bytes": 6
+      },
+      {
+        "ms": 2.53,
+        "status": 307,
+        "bytes": 6
+      }
+    ],
+    "/cliente": [
+      {
+        "ms": 2.65,
+        "status": 307,
+        "bytes": 14
+      },
+      {
+        "ms": 2.51,
+        "status": 307,
+        "bytes": 14
+      },
+      {
+        "ms": 2.06,
+        "status": 307,
+        "bytes": 14
+      },
+      {
+        "ms": 2.06,
+        "status": 307,
+        "bytes": 14
+      },
+      {
+        "ms": 2.15,
+        "status": 307,
+        "bytes": 14
+      },
+      {
+        "ms": 2.48,
+        "status": 307,
+        "bytes": 14
+      }
+    ]
+  }
+}

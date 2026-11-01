@@ -1,0 +1,23 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
+export type UsageHistoryRow = { id: string; client_id: string; client_package_id: string; quantity: number; occurred_at: string; reversed_at: string | null; created_by: string | null; professional_name?: string };
+export async function loadUsageHistory(supabase: SupabaseClient, organizationId?: string, clientId?: string) {
+  const { data: professionals, error: professionalsError } = organizationId
+    ? await supabase.rpc("usage_professionals", { p_organization_id: organizationId })
+    : { data: [], error: null };
+  if (professionalsError) throw new Error("Não foi possível carregar os profissionais do histórico.");
+  const names = new Map<string, string>((professionals || []).map((p: { user_id: string; full_name: string }) => [p.user_id, p.full_name]));
+  const rows: UsageHistoryRow[] = [];
+  for (let offset = 0; ; offset += 1000) {
+    let query = supabase.from("service_usages").select("id,client_id,client_package_id,quantity,occurred_at,reversed_at,created_by").order("occurred_at", { ascending: false }).order("id").range(offset, offset + 999);
+    if (organizationId) query = query.eq("organization_id", organizationId);
+    if (clientId) query = query.eq("client_id", clientId);
+    const { data, error } = await query;
+    if (error) throw new Error("Não foi possível carregar o histórico de usos.");
+    rows.push(...(data || []));
+    if (!data || data.length < 1000) return rows.map(row => ({ ...row, professional_name: row.created_by ? names.get(row.created_by) || "Profissional da organização" : undefined }));
+  }
+}
+export function usageDate(value: string) {
+  const date = new Date(value);
+  return new Intl.DateTimeFormat("pt-BR", { timeZone: "America/Sao_Paulo", dateStyle: "short" }).format(date) + " às " + new Intl.DateTimeFormat("pt-BR", { timeZone: "America/Sao_Paulo", timeStyle: "short" }).format(date);
+}

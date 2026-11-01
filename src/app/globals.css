@@ -299,3 +299,14 @@ td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
 .origineLogin_signup a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .origineLogin_success { margin: 0 0 20px; padding: 12px; background: var(--success-bg); color: var(--success); border-radius: 7px; font-size: 13px; }
 .origineLogin_recovery:where([data-theme="dark"] *) a { color: #ffac94; }
+
+/* Service consumption uses the existing theme tokens and form components. */
+.usage-fields { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 1rem; }
+.usage-quantities { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.usage-quantity { display: flex; align-items: center; justify-content: center; gap: .6rem; padding: 1.4rem .6rem; border: 1px solid currentColor; border-radius: .8rem; cursor: pointer; }
+.usage-quantity:has(input:checked) { outline: 3px solid currentColor; outline-offset: 2px; }
+.usage-quantity:has(input:disabled) { opacity: .45; cursor: not-allowed; }
+.usage-history { margin-top: 1.5rem; }
+.usage-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.usage-list li { border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent); padding-bottom: 1rem; overflow-wrap: anywhere; }
+.usage-list p { margin: .35rem 0; }

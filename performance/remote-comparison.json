@@ -1,0 +1,161 @@
+{
+  "method": "remote Supabase read-only service role, RLS bypassed, samples interleaved; not authenticated page timing",
+  "samples": [
+    {
+      "label": "baseline clients",
+      "ms": 695.75,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "bounded clients",
+      "ms": 579.19,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "baseline history",
+      "ms": 243.27,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "bounded joined history",
+      "ms": 253.49,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "baseline clients",
+      "ms": 623.85,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "bounded clients",
+      "ms": 244.15,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "baseline history",
+      "ms": 236.83,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "bounded joined history",
+      "ms": 236.21,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "baseline clients",
+      "ms": 230.91,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "bounded clients",
+      "ms": 239.82,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "baseline history",
+      "ms": 626.12,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "bounded joined history",
+      "ms": 223.68,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "baseline clients",
+      "ms": 229.6,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "bounded clients",
+      "ms": 249.01,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "baseline history",
+      "ms": 233.57,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "bounded joined history",
+      "ms": 230.55,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "baseline clients",
+      "ms": 254.91,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "bounded clients",
+      "ms": 231.01,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "baseline history",
+      "ms": 237.17,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "bounded joined history",
+      "ms": 237.6,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "baseline clients",
+      "ms": 683.19,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "bounded clients",
+      "ms": 230.37,
+      "rows": 3,
+      "error": null
+    },
+    {
+      "label": "baseline history",
+      "ms": 234.44,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "bounded joined history",
+      "ms": 231.36,
+      "rows": 1,
+      "error": null
+    },
+    {
+      "label": "new read RPC availability",
+      "ms": 252.31,
+      "rows": null,
+      "error": "PGRST202"
+    },
+    {
+      "label": "earlier professional read RPC availability",
+      "ms": 239.76,
+      "rows": null,
+      "error": "P0001"
+    }
+  ]
+}

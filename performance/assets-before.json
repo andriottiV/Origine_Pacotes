@@ -1,0 +1,17 @@
+{
+  "method": "production Next entryJSFiles for /cliente/page, sum of unique static JS file sizes; excludes HTML, RSC and non-entry chunks",
+  "files": [
+    {
+      "path": "static/chunks/0kaw2kkfcy6dg.js",
+      "bytes": 14543,
+      "gzipBytes": 3788
+    },
+    {
+      "path": "static/chunks/2up6bcwnhemoy.js",
+      "bytes": 6983,
+      "gzipBytes": 2910
+    }
+  ],
+  "bytes": 21526,
+  "gzipBytes": 6698
+}

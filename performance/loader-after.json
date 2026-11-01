@@ -1,0 +1,41 @@
+{
+  "method": "actual helper for requested phase, 10,000 synthetic usages, fixed 30ms per mocked API call, 6 sequential runs; not hosted page latency",
+  "samples": [
+    {
+      "ms": 38.55,
+      "calls": 2,
+      "loadedRows": 11,
+      "displayedRows": 10
+    },
+    {
+      "ms": 31.67,
+      "calls": 2,
+      "loadedRows": 11,
+      "displayedRows": 10
+    },
+    {
+      "ms": 32.42,
+      "calls": 2,
+      "loadedRows": 11,
+      "displayedRows": 10
+    },
+    {
+      "ms": 46.37,
+      "calls": 2,
+      "loadedRows": 11,
+      "displayedRows": 10
+    },
+    {
+      "ms": 32.01,
+      "calls": 2,
+      "loadedRows": 11,
+      "displayedRows": 10
+    },
+    {
+      "ms": 45.94,
+      "calls": 2,
+      "loadedRows": 11,
+      "displayedRows": 10
+    }
+  ]
+}

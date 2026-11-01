@@ -1,0 +1,41 @@
+{
+  "method": "actual baseline helper, 10,000 synthetic usages, fixed 30ms per mocked API call, 6 sequential runs; not hosted page latency",
+  "samples": [
+    {
+      "ms": 437.61,
+      "calls": 12,
+      "loadedRows": 10000,
+      "displayedRows": 10
+    },
+    {
+      "ms": 386.44,
+      "calls": 12,
+      "loadedRows": 10000,
+      "displayedRows": 10
+    },
+    {
+      "ms": 395.91,
+      "calls": 12,
+      "loadedRows": 10000,
+      "displayedRows": 10
+    },
+    {
+      "ms": 404.69,
+      "calls": 12,
+      "loadedRows": 10000,
+      "displayedRows": 10
+    },
+    {
+      "ms": 391.82,
+      "calls": 12,
+      "loadedRows": 10000,
+      "displayedRows": 10
+    },
+    {
+      "ms": 393.19,
+      "calls": 12,
+      "loadedRows": 10000,
+      "displayedRows": 10
+    }
+  ]
+}

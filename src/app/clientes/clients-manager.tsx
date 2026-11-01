@@ -1,11 +1,13 @@
 ﻿"use client";
+import Link from "next/link";
+import Form from "next/form";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { StatusBadge } from "../../components/brand";
 import { archiveClient, createClient, updateClient } from "./actions";
 import AccessButton from "./access-button";
 
-type Client = { id: string; full_name: string; phone_normalized: string | null; notes: string | null; status: string; created_at: string };
+type Client = { id: string; full_name: string; phone_normalized: string | null; notes: string | null; status: string; created_at: string; remaining?: number };
 export default function ClientsManager({ clients, query }: { clients: Client[]; query: string }) {
   const router = useRouter();
   const [editing, setEditing] = useState<Client | null>(null);
@@ -26,7 +28,7 @@ export default function ClientsManager({ clients, query }: { clients: Client[]; 
     if (result.success) router.refresh();
   }
   return <section className="clients-manager">
-    <form className="search-form" action="/clientes"><label htmlFor="q">Pesquisar por nome ou telefone</label><div><input id="q" name="q" defaultValue={query} /><button className="button secondary">Pesquisar</button></div></form>
+    <Form className="search-form" action="/clientes"><label htmlFor="q">Pesquisar por nome ou telefone</label><div><input id="q" name="q" defaultValue={query} /><button className="button secondary">Pesquisar</button></div></Form>
     <div className="client-layout">
       <form key={editing?.id || "new"} className="card client-form" onSubmit={submit}>
         <h2>{editing ? "Editar cliente" : "Novo cliente"}</h2>{editing && <input type="hidden" name="id" value={editing.id} />}
@@ -38,8 +40,8 @@ export default function ClientsManager({ clients, query }: { clients: Client[]; 
       </form>
       <section className="card clients-list"><h2>{clients.length ? `${clients.length} cliente${clients.length === 1 ? "" : "s"}` : "Nenhum cliente encontrado"}</h2>
         {!clients.length ? <p className="empty">{query ? "Nenhum resultado para esta pesquisa." : "Os clientes cadastrados aparecerão aqui."}</p> : <div className="table-scroll" role="region" aria-label="Lista de clientes" tabIndex={0}>
-          <table className="clients-table"><thead><tr><th scope="col">Cliente</th><th scope="col">Status</th><th scope="col">Ações</th></tr></thead><tbody>
-            {clients.map(client => <tr key={client.id}><td><strong>{client.full_name}</strong><small>{client.phone_normalized || "Sem telefone"}</small></td><td><StatusBadge tone={client.status === "active" ? "success" : "neutral"}>{client.status === "active" ? "Ativo" : client.status === "archived" ? "Arquivado" : client.status}</StatusBadge></td><td><div className="row-actions"><button className="text-link" onClick={() => setEditing(client)}>Editar</button><AccessButton clientId={client.id} name={client.full_name} />{client.status === "active" && <button className="text-link danger" onClick={() => archive(client.id)}>Arquivar</button>}</div></td></tr>)}
+          <table className="clients-table"><thead><tr><th scope="col">Cliente</th><th scope="col">Saldo válido</th><th scope="col">Status</th><th scope="col">Ações</th></tr></thead><tbody>
+            {clients.map(client => <tr key={client.id}><td><strong>{client.full_name}</strong><small>{client.phone_normalized || "Sem telefone"}</small></td><td>{client.remaining ?? 0} serviços</td><td><StatusBadge tone={client.status === "active" ? "success" : "neutral"}>{client.status === "active" ? "Ativo" : client.status === "archived" ? "Arquivado" : client.status}</StatusBadge></td><td><div className="row-actions"><Link className="text-link" href={"/atendimentos/novo?clientId=" + client.id}>Registrar uso</Link><button className="text-link" onClick={() => setEditing(client)}>Editar</button><AccessButton clientId={client.id} name={client.full_name} />{client.status === "active" && <button className="text-link danger" onClick={() => archive(client.id)}>Arquivar</button>}</div></td></tr>)}
           </tbody></table>
         </div>}
       </section>

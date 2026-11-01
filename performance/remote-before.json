@@ -1,0 +1,85 @@
+{
+  "environment": "remote Supabase read-only service role (RLS bypassed; not authenticated page latency)",
+  "queries": [
+    {
+      "label": "organization lookup (limit 1)",
+      "ms": 2122.94,
+      "rows": 1,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "clients limit 1000 run 0",
+      "ms": 955.76,
+      "rows": 3,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "packages limit 1000 run 0",
+      "ms": 242.24,
+      "rows": 3,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "history first page run 0",
+      "ms": 250.52,
+      "rows": 1,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "clients limit 1000 run 1",
+      "ms": 237.25,
+      "rows": 3,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "packages limit 1000 run 1",
+      "ms": 244.63,
+      "rows": 3,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "history first page run 1",
+      "ms": 257.46,
+      "rows": 1,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "clients limit 1000 run 2",
+      "ms": 673,
+      "rows": 3,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "packages limit 1000 run 2",
+      "ms": 251.27,
+      "rows": 3,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "history first page run 2",
+      "ms": 490.91,
+      "rows": 1,
+      "count": null,
+      "error": null
+    },
+    {
+      "label": "history explain availability",
+      "ms": 302.89,
+      "rows": null,
+      "count": null,
+      "error": {
+        "code": "PGRST107",
+        "message": "None of these media types are available: application/vnd.pgrst.plan+json; for=\"application/json\""
+      }
+    }
+  ]
+}

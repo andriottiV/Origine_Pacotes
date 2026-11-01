@@ -1,4 +1,4 @@
-export type ServiceUsage = { client_package_id: string; quantity: number };
+export type ServiceUsage = { client_package_id: string; quantity: number; reversed_at?: string | null };
 
 export function todayInSaoPaulo(now = new Date()) {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -9,7 +9,7 @@ export function todayInSaoPaulo(now = new Date()) {
 }
 
 export function remainingServices(packageId: string, total: number, usages: ServiceUsage[]) {
-  return total - usages.filter((usage) => usage.client_package_id === packageId).reduce((sum, usage) => sum + usage.quantity, 0);
+  return total - usages.filter((usage) => usage.client_package_id === packageId && !usage.reversed_at).reduce((sum, usage) => sum + usage.quantity, 0);
 }
 
 export function supabaseDiagnostic(error: { code?: string; message?: string; details?: string | null; hint?: string | null }) {

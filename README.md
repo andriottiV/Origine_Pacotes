@@ -48,3 +48,47 @@ As novas páginas estão implementadas em /cadastro, /esqueci-senha e /redefinir
 A ativação depende da migration e das configurações externas descritas em
 [docs/auth-setup.md](docs/auth-setup.md). Consulte esse guia antes de testar com
 usuários reais. Nenhuma migration é aplicada automaticamente pela aplicação.
+
+
+## Registro simples de uso de serviços
+
+Acesse **Clientes → Registrar uso**, ou **Início → Registrar uso**, na rota
+/atendimentos/novo. Selecione o cliente, o pacote e explicitamente 1 ou 2 serviços.
+A prévia mostra o saldo restante; nenhuma identificação de serviço ou beneficiário é exigida.
+O histórico permite estornar com confirmação. O dashboard mostra os dez usos mais
+recentes; o portal do cliente mostra o histórico e os saldos do mesmo ledger.
+
+Antes de disponibilizar esta versão, aplique a migration incremental
+supabase/migrations/20261101100000_simple_service_usage.sql depois das anteriores,
+pelo processo habitual de migrations do Supabase. Ela não foi aplicada ao banco remoto.
+Não é necessário resetar o banco. Valores financeiros e validades são preservados.
+
+Consumo e estorno travam o pacote e calculam o saldo pelos usos não estornados.
+A chave de idempotência é vinculada ao autor, pacote, quantidade e observação legada.
+O formulário conserva a mesma solicitação em tentativas após perda de resposta.
+Membros (incluindo staff) registram e estornam; clientes do portal têm somente leitura.
+A RPC antiga sem idempotência passa a ser interna. Linhas legadas são preservadas.
+
+Validação local: npm run lint, npx tsc --noEmit, npm test e npm run build.
+Para executar PostgreSQL em memória sem acessar a aplicação:
+
+    npm install --prefix .tmp-usage-db --no-save --package-lock=false --cache .tmp-usage-db/npm-cache @electric-sql/pglite
+    node supabase/tests/simple_service_usage.mjs
+
+O script aplica todas as migrations em banco isolado e testa RPCs, permissões, RLS
+do portal, idempotência, saldo, estorno e ausência de efeitos financeiros. A extensão
+pgcrypto é omitida apenas no harness, pois UUID já é nativo do PostgreSQL.
+A pasta temporária .tmp-usage-db pode ser removida após essa verificação.
+
+O harness tem uma conexão e não substitui o ensaio com conexões independentes.
+Em um Supabase de homologação com a migration aplicada, execute dois consumos
+simultâneos, com chaves diferentes, sobre um pacote com saldo 2: apenas um consumo
+de 2 deve ser aceito. Repita com a mesma chave: ambos devem devolver o mesmo
+lançamento, com um único desconto. Dois estornos simultâneos do mesmo uso devem
+produzir uma única entrada de auditoria de estorno.
+A verificação em navegador autenticado no Supabase publicado permanece externa.
+
+
+## Desempenho
+
+O diagnóstico, as amostras antes/depois e os limites da medição estão em [performance/REPORT.md](performance/REPORT.md). A versão com consultas paginadas depende da migration incremental `20261101110000_bounded_usage_reads.sql`, que ainda precisa ser aplicada no Supabase. A instrumentação opcional usa `ORIGINE_PERF=1` no servidor, sem registrar dados privados.
