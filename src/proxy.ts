@@ -1,5 +1,6 @@
 ﻿import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { safePushDestination } from "./lib/push/shared";
 import { createTimedFetch } from "./lib/performance";
 import { recoveryClaims } from "./lib/auth-flow/shared";
 
@@ -17,8 +18,9 @@ export async function proxy(request: NextRequest) {
   } });
   const path = request.nextUrl.pathname;
   const authRoute = path.startsWith("/auth/") || ["/cadastro", "/esqueci-senha", "/redefinir-senha"].includes(path);
-  function redirect(pathname: string) {
+  function redirect(pathname: string, next?: string) {
     const target = request.nextUrl.clone(); target.pathname = pathname; target.search = "";
+    if (next) target.searchParams.set("next", safePushDestination(next));
     const result = NextResponse.redirect(target);
     response.cookies.getAll().forEach(cookie => result.cookies.set(cookie));
     return result;
@@ -30,7 +32,7 @@ export async function proxy(request: NextRequest) {
     return response;
   }
   const isClientRoute = path === "/cliente" || path.startsWith("/cliente/");
-  if (!user && path !== "/login" && path !== "/cliente/login") return redirect(isClientRoute ? "/cliente/login" : "/login");
+  if (!user && path !== "/login" && path !== "/cliente/login") return redirect(isClientRoute ? "/cliente/login" : "/login", isClientRoute && path.startsWith("/cliente/pacotes/") ? path : undefined);
   if (user) {
     const { data, error } = await supabase.auth.getClaims();
     if (error || !data?.claims) return redirect("/auth/erro");

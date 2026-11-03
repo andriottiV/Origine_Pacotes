@@ -310,3 +310,7 @@ td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
 .usage-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
 .usage-list li { border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent); padding-bottom: 1rem; overflow-wrap: anywhere; }
 .usage-list p { margin: .35rem 0; }
+
+.push-settings { margin-top: 1.5rem; }
+.push-preference { display: flex; gap: .75rem; align-items: center; min-height: 2.75rem; }
+.push-preference input { width: 1.15rem; height: 1.15rem; }

@@ -26,3 +26,10 @@ describe("Auth proxy routing", () => {
     expect((await proxy(new NextRequest("https://origine-pacotes.vercel.app/"))).headers.get("location")).toBe("https://origine-pacotes.vercel.app/auth/complete");
   });
 });
+
+it("preserves only a safe client package destination through login",async()=>{
+ const sdk=fakeUser();sdk.auth.getUser.mockResolvedValue({data:{user:null}} as never);client.mockReturnValue(sdk);
+ const path="/cliente/pacotes/10000000-0000-4000-8000-000000000040";
+ const response=await proxy(new NextRequest("https://origine-pacotes.vercel.app"+path));
+ expect(new URL(response.headers.get("location")!).searchParams.get("next")).toBe(path);
+});

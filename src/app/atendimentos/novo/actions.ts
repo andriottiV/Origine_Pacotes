@@ -2,6 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { requireOrganization } from "@/lib/auth";
 import { z } from "zod";
+import { schedulePushProcessing } from "@/lib/push/after";
 import { timed } from "@/lib/performance";
 
 function refreshBalances() {
@@ -23,6 +24,7 @@ export async function registerAttendance(_: unknown, formData: FormData) {
   }));
   if (error) return { error: error.message };
   refreshBalances();
+  schedulePushProcessing();
   return { success: `${data.quantity} serviço${data.quantity === 1 ? "" : "s"} utilizado${data.quantity === 1 ? "" : "s"}. Saldo atualizado.` };
 }
 
@@ -32,5 +34,6 @@ export async function reverseAttendance(id: string) {
   const { error } = await timed("usage.reverse.rpc", () => supabase.rpc("reverse_service_usage", { p_usage_id: id, p_organization_id: membership.organization_id }));
   if (error) return { error: error.message };
   refreshBalances();
+  schedulePushProcessing();
   return { success: "Uso estornado. Saldo atualizado e validade original preservada." };
 }

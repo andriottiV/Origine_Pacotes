@@ -1,0 +1,3 @@
+import {afterEach,expect,it,vi} from "vitest";import {authorizedCron} from "./cron";
+afterEach(()=>vi.unstubAllEnvs());
+it("requires a strong server secret and exact Bearer authentication",()=>{vi.stubEnv("CRON_SECRET","x".repeat(32));expect(authorizedCron(new Request("https://example.invalid/api/push/process"))).toBe(false);expect(authorizedCron(new Request("https://example.invalid/api/push/process",{headers:{Authorization:"Bearer "+"x".repeat(32)}}))).toBe(true);vi.stubEnv("CRON_SECRET","short");expect(authorizedCron(new Request("https://example.invalid/api/push/process",{headers:{Authorization:"Bearer short"}}))).toBe(false);});

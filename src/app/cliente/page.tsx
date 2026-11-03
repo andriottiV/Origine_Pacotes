@@ -7,7 +7,8 @@ import PageNavigation from "@/components/page-navigation";
 import UsageHistory from "@/components/usage-history-view";
 import { loadUsageHistory } from "@/lib/usage-history";
 import { todayInSaoPaulo } from "@/lib/attendance";
-import { signOutClient } from "../auth/actions";
+import ClientSignOut from "@/components/client-sign-out";
+import PushSettings from "@/components/push-settings";
 import ClientSecurityForm from "./security-form";
 import PackageTicket from "../../components/package-ticket";
 import { Brand } from "../../components/brand";
@@ -35,7 +36,7 @@ export default async function ClientPortal({ searchParams }: { searchParams: Pro
   const org = Array.isArray(identity.organizations) ? identity.organizations[0] : identity.organizations;
   return <main className="clients-page client-portal">
     <div className="portal-brand"><Brand /></div>
-    <header className="clients-header"><p className="eyebrow">{org?.name}</p><h1>Olá, {client?.full_name}</h1><p>Consulte seus pacotes e saldo disponível.</p><form action={signOutClient}><button className="text-link">Sair</button></form></header>
+    <header className="clients-header"><p className="eyebrow">{org?.name}</p><h1>Olá, {client?.full_name}</h1><p>Consulte seus pacotes e saldo disponível.</p><ClientSignOut /></header>
     <section className="portal-packages" aria-label="Seus pacotes">
       {(packages || []).map((p, index) => <PackageTicket key={p.id} name={p.package_name} balances={[{ label: "Serviços", total: p.total_services, remaining: p.remaining }]} expiresOn={p.expires_on} status={p.expires_on < todayInSaoPaulo() ? "Vencido" : p.payment_status === "paid" ? "Quitado" : p.payment_status === "partial" ? "Pagamento parcial" : p.payment_status === "pending" ? "Pagamento pendente" : p.payment_status} tone={index % 3 === 0 ? "persimmon" : index % 3 === 1 ? "paper" : "aubergine"} />)}
       {!packages?.length && <p className="empty">{packagePage ? "Não há pacotes nesta página. Volte à página anterior." : "Você ainda não possui pacotes cadastrados."}</p>}
@@ -43,6 +44,7 @@ export default async function ClientPortal({ searchParams }: { searchParams: Pro
     <PageNavigation label="Seus pacotes" previous={packagePage ? pageHref('/cliente', params, 'packagePage', packagePage - 1) : undefined} next={packageResult.hasMore ? pageHref('/cliente', params, 'packagePage', packagePage + 1) : undefined} />
     <UsageHistory usages={history.rows} />
     <PageNavigation label="Seus usos" previous={historyPage ? pageHref('/cliente', params, 'historyPage', historyPage - 1) : undefined} next={history.hasMore ? pageHref('/cliente', params, 'historyPage', historyPage + 1) : undefined} />
+    <PushSettings publicKey={process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || ""} configured={process.env.PUSH_ENABLED === "true" && Boolean(process.env.VAPID_PRIVATE_KEY && process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_SUBJECT)} />
     <ClientSecurityForm />
   </main>;
 }

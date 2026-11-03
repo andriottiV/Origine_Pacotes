@@ -92,3 +92,8 @@ A verificação em navegador autenticado no Supabase publicado permanece externa
 ## Desempenho
 
 O diagnóstico, as amostras antes/depois e os limites da medição estão em [performance/REPORT.md](performance/REPORT.md). A versão com consultas paginadas depende da migration incremental `20261101110000_bounded_usage_reads.sql`, que ainda precisa ser aplicada no Supabase. A instrumentação opcional usa `ORIGINE_PERF=1` no servidor, sem registrar dados privados.
+
+
+## Notificações Web Push
+
+O portal possui ativação opcional por aparelho, quatro preferências e avisos de uso, estorno, saldo baixo e vencimento. Consulte [docs/web-push-setup.md](docs/web-push-setup.md) para a migration, VAPID, variáveis e agendamento obrigatório. A implantação externa ainda precisa ser configurada; nenhum push real foi enviado nos testes.

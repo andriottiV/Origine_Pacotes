@@ -1,0 +1,27 @@
+{
+  "method": "PGlite isolated single connection, before/after outbox trigger, same package, 1 warmup + 7 rollbacks; no HTTP; not hosted latency",
+  "before": {
+    "samples": [
+      4.443,
+      4.063,
+      3.663,
+      3.303,
+      2.826,
+      1.718,
+      1.686
+    ],
+    "median": 3.303
+  },
+  "after": {
+    "samples": [
+      4.871,
+      4.937,
+      3.742,
+      5.605,
+      4.332,
+      2.573,
+      2.057
+    ],
+    "median": 4.332
+  }
+}
