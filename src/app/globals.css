@@ -1,7 +1,7 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --brand-paper: #f2eee5; --brand-surface: #faf7f0; --brand-ink: #302332; --brand-persimmon: #d94f35; --brand-butter: #e8ce79;
+  --brand-paper: #f7f4ee; --brand-surface: #faf7f0; --brand-ink: #2f2b2f; --brand-persimmon: #c37a65; --brand-butter: #e8ce79;
   --bg: var(--brand-paper); --surface: var(--brand-surface); --surface-muted: #eee8df;
   --text: var(--brand-ink); --muted: #756d77; --border: #ddd5cb; --control-border: #93868e;
   --primary: #b94028; --primary-contrast: #fffaf4; --soft: #f5e4d9; --sand: #e9dfcf; --focus: #a33723;
@@ -41,12 +41,12 @@ h3 { font-size: 16px; }
 .sidebar { position: fixed; inset: 0 auto 0 0; width: var(--sidebar-width); padding: 30px 12px 18px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 20; overflow-y: auto; overscroll-behavior: contain; }
 .brand { position: relative; display: flex; justify-content: center; padding-bottom: 26px; }
 .brand a { text-decoration: none; }
-.wordmark { display: inline-flex; flex-direction: column; width: fit-content; line-height: .9; color: var(--text); }
-.wordmark > span { font-family: var(--serif); font-size: 58px; font-weight: 600; letter-spacing: -.075em; font-variation-settings: "opsz" 36; }
-.wordmark small { display: flex; justify-content: flex-end; align-items: center; gap: 9px; margin-top: 12px; font-size: 8px; letter-spacing: .55em; padding-right: 2px; }
-.wordmark i { width: 20px; height: 3px; background: var(--brand-persimmon); }
-.wordmark-compact > span { font-size: 35px; }
-.wordmark-compact small { font-size: 6px; margin-top: 7px; }
+.wordmark { display: inline-block; width: 160px; max-width: 100%; line-height: 0; vertical-align: middle; }
+.wordmark img { display: block; width: 100%; height: auto; }
+.wordmark-compact { width: 40px; }
+/* Preserve the approved graphite artwork with a cream surface in dark mode. */
+[data-theme="dark"] .wordmark { background: #f7f4ee; padding: 10px; border-radius: 8px; }
+[data-theme="dark"] .wordmark-compact { padding: 5px; }
 .organization-label { display: flex; align-items: center; gap: 12px; padding: 0 14px; margin: 0 0 24px; font-size: 12px; min-height: 26px; }
 .organization-label span { overflow-wrap: anywhere; }
 .sidebar nav { display: grid; gap: 7px; }

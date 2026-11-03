@@ -38,7 +38,7 @@ self.addEventListener("push", event => {
       if (await binding() !== payload.bindingToken) return;
       const response = await fetch("/api/push/verify", { method: "POST", credentials: "same-origin", cache: "no-store", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ eventId: payload.eventId, bindingToken: payload.bindingToken }) });
       if (!response.ok || !(await response.json()).allowed || await binding() !== payload.bindingToken) return;
-      await self.registration.showNotification("Origine Pacotes", { body: payload.body, icon: "/icons/push-192.png", badge: "/icons/push-192.png", tag: "origine-" + payload.eventId, data: { url: destination(payload.url) } });
+      await self.registration.showNotification("Origine Pacotes", { body: payload.body, icon: "/icons/origine-192-v1.png", badge: "/icons/origine-badge-96-v1.png", tag: "origine-" + payload.eventId, data: { url: destination(payload.url) } });
     } catch { /* Fail closed if the current account cannot be verified. No logs. */ }
   })());
 });

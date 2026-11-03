@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
+import { Brand } from "../../components/brand";
 import { FormEvent, useRef, useState } from "react";
 import { ArrowRight, ChartNoAxesColumnIncreasing, Eye, EyeOff, Layers2, LockKeyhole, Mail, UserRound, UsersRound } from "lucide-react";
 import localFont from "next/font/local";
@@ -9,10 +10,6 @@ import "./login.css";
 
 const editorial = localFont({ src: "../../../public/fonts/bodoni-moda.ttf", variable: "--login-serif", display: "swap" });
 
-function Wordmark() {
-  return <span className={"origineLogin_wordmark"}><span>origine</span><small><i />PACOTES</small></span>;
-}
-
 function Tickets() {
   return <div className={"origineLogin_tickets"} aria-hidden="true">
     {[
@@ -20,7 +17,7 @@ function Tickets() {
       { number: "05", caption: "SESSÕES", note: <>PESSOAS<br />PLANOS<br />EVOLUÇÃO</>, slogan: <>CADA ENCONTRO<br />CONTA</>, tone: "origineLogin_cream" },
       { number: "01", caption: "SESSÃO", note: <>COMEÇOS<br />TAMBÉM<br />TRANSFORMAM</>, slogan: <>UM NOVO<br />COMEÇO</>, tone: "origineLogin_aubergine" },
     ].map(ticket => <div key={ticket.number} className={`${"origineLogin_ticket"} ${ticket.tone}`}>
-      <Wordmark /><span className={"origineLogin_ticketSlogan"}>{ticket.slogan}</span>
+      <Brand compact /><span className={"origineLogin_ticketSlogan"}>{ticket.slogan}</span>
       <span className={"origineLogin_session"}><b>{ticket.number}</b><small>{ticket.caption}</small></span>
       <span className={"origineLogin_ticketNote"}>{ticket.note}<i /></span>
     </div>)}
@@ -74,7 +71,7 @@ export default function LoginForm({ configurationError, passwordUpdated = false 
     <section className={"origineLogin_login"} aria-labelledby="login-title">
       <p className={"origineLogin_motto"} aria-hidden="true">ORGANIZAÇÃO<br />HOJE,<br />CLIENTES<br />SEMPRE.</p>
       <div className={"origineLogin_loginContent"}>
-        <div className={"origineLogin_brand"} aria-label="Origine Pacotes"><Wordmark /></div>
+        <div className={"origineLogin_brand"}><Brand /></div>
         <p className={"origineLogin_mobileEditorial"}>Cada visita. <span>Uma conexão.</span></p>
         <header className={"origineLogin_welcome"}>
           <h1 id="login-title">Bem-vindo de volta</h1>

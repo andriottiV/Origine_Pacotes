@@ -22,17 +22,9 @@
 .origineLogin_editorialFootnote { position: absolute; bottom: 26px; left: 42%; font-size: 9px; letter-spacing: .22em; transform: rotate(-7deg); }
 .origineLogin_tickets { position: absolute; left: 41%; top: 335px; width: 60%; height: 540px; }
 .origineLogin_ticket { position: absolute; width: 100%; height: 222px; border-radius: 7px; box-shadow: 0 15px 18px -10px #30233280, inset 0 0 0 1px #30233219; display: grid; grid-template-columns: 48% 27% 25%; grid-template-rows: 1fr 1fr; padding: 25px 25px 23px 30px; mask: radial-gradient(circle at 0 7px, transparent 5px, #000 5.8px) 0 0 / 100% 22px; }
-.origineLogin_persimmon { z-index: 3; background: #d65332; color: #2b1d25; transform: rotate(-14deg); top: 0; left: 1%; }
+.origineLogin_persimmon { z-index: 3; background: var(--accent); color: #2b1d25; transform: rotate(-14deg); top: 0; left: 1%; }
 .origineLogin_cream { z-index: 2; background: #eae1d1; color: #302332; transform: rotate(10deg); top: 180px; left: -3%; }
 .origineLogin_aubergine { z-index: 1; background: #382731; color: #e9dec9; transform: rotate(15deg); top: 327px; left: -7%; }
-.origineLogin_wordmark { display: inline-flex; flex-direction: column; width: fit-content; line-height: .9; }
-.origineLogin_wordmark > span { font-family: var(--login-serif), Georgia, serif; font-weight: 650; font-size: 64px; letter-spacing: -.075em; }
-.origineLogin_wordmark small { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 9px; font-size: 9px; font-weight: 500; letter-spacing: .43em; }
-.origineLogin_wordmark i { width: 22px; height: 4px; background: var(--accent); }
-.origineLogin_ticket .origineLogin_wordmark > span { font-size: 49px; }
-.origineLogin_ticket .origineLogin_wordmark small { font-size: 7px; letter-spacing: .4em; gap: 7px; }
-.origineLogin_ticket .origineLogin_wordmark i { background: currentColor; height: 3px; width: 18px; }
-.origineLogin_persimmon .origineLogin_wordmark { color: #f2e5c8; }
 .origineLogin_ticketSlogan { grid-row: 2; align-self: end; font-size: 10px; line-height: 1.6; letter-spacing: .2em; }
 .origineLogin_session { grid-column: 2; grid-row: 1 / 3; align-self: end; text-align: center; }
 .origineLogin_session b { font-family: var(--login-serif), Georgia, serif; font-size: 87px; font-weight: 500; letter-spacing: -.08em; line-height: 1; }
@@ -42,7 +34,11 @@
 .origineLogin_login { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 90px 38px 35px; background: var(--surface); }
 .origineLogin_loginContent { width: 100%; max-width: 440px; }
 .origineLogin_motto { position: absolute; top: 28px; right: 30px; margin: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 8px; letter-spacing: .23em; line-height: 1.8; }
-.origineLogin_brand { margin-bottom: 56px; }
+.origineLogin_brand { margin-bottom: 28px; }
+.origineLogin_brand .wordmark { width: 190px; }
+.origineLogin_ticket .wordmark { width: 64px; align-self: center; background: #f7f4ee; padding: 8px; border-radius: 6px; }
+.origineLogin_cream .wordmark, .origineLogin_aubergine .wordmark { grid-row: 1 / 3; transform: translateY(42px); }
+.origineLogin_cream .wordmark { transform: translateY(62px); }
 .origineLogin_welcome h1 { font-family: var(--login-serif), Georgia, serif; margin: 0 0 10px; font-weight: 650; letter-spacing: -.045em; font-size: clamp(29px, 3.15vw, 48px); line-height: 1.15; }
 .origineLogin_welcome p { font-size: 17px; line-height: 1.5; color: var(--secondary); margin: 0 0 30px; }
 .origineLogin_field + .origineLogin_field { margin-top: 23px; }
@@ -79,7 +75,8 @@
   .origineLogin_description { width: 75%; }
   .origineLogin_tickets { top: 560px; left: 42%; width: 66%; }
   .origineLogin_ticket { height: 150px; padding: 18px; }
-  .origineLogin_ticket .origineLogin_wordmark > span { font-size: 34px; }
+  .origineLogin_ticket .wordmark { width: 48px; }
+  .origineLogin_cream .wordmark { transform: translateY(44px); }
   .origineLogin_ticketSlogan { font-size: 7px; }
   .origineLogin_session b { font-size: 58px; }
   .origineLogin_ticketNote { font-size: 6px; padding-left: 8px; }
@@ -109,11 +106,9 @@
 }
 
 
-/* Keep the visible wordmarks clear of the ticket above them. */
-.origineLogin_cream .origineLogin_wordmark, .origineLogin_aubergine .origineLogin_wordmark { grid-row: 1 / 3; align-self: center; transform: translateY(22px); }
+/* Keep the visible symbols clear of the ticket above them. */
 .origineLogin_cream .origineLogin_ticketSlogan, .origineLogin_aubergine .origineLogin_ticketSlogan { display: none; }
 .origineLogin_page { font-optical-sizing: none; }
-.origineLogin_headline, .origineLogin_wordmark > span, .origineLogin_welcome h1 { font-variation-settings: "opsz" 36; }
 .origineLogin_mobileEditorial:where([data-theme="dark"] *) span { color: #ffac94; }
 /* Functional borders meet non-text contrast, and mobile inputs avoid focus zoom. */
 .origineLogin_page { --line: #93868e; }
@@ -128,3 +123,5 @@
   .origineLogin_editorial { min-height: 960px; }
   .origineLogin_tickets { top: 740px; }
 }
+
+.origineLogin_headline, .origineLogin_welcome h1 { font-variation-settings: "opsz" 36; }
