@@ -1,11 +1,12 @@
 import "server-only";
+import { getPushConfiguration } from "./config";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { pushBody, safePushDestination, type PushKind } from "./shared";
 import { pushConfigured, sendPush } from "./transport";
 type Claim = { event_id: string; subscription_id: string; claim_token: string };
 type Authorized = { endpoint: string; p256dh: string; auth_key: string; binding_token: string; kind: PushKind; quantity: number | null; remaining: number; client_package_id: string; expires_at: string };
 export async function processPushBatch(limit = 5) {
-  if (!pushConfigured()) return { configured: false, claimed: 0, accepted: 0 };
+  if (!pushConfigured()) return { configured: false, configuration: getPushConfiguration(), claimed: 0, accepted: 0 };
   const admin = createSupabaseAdminClient();
   const { data: claims, error } = await admin.rpc("claim_push_deliveries", { p_limit: Math.min(limit, 20) });
   if (error) throw new Error("push_claim_failed");

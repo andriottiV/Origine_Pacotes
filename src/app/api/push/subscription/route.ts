@@ -1,3 +1,4 @@
+import { getPushConfiguration, getPushPublicKey } from "@/lib/push/config";
 import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { currentDevice, deviceCookie, detachPushDevice, privateJson, pushIdentity, sameOrigin, smallJson } from "@/lib/push/server";
@@ -6,20 +7,23 @@ import { defaultPushPreferences } from "@/lib/push/shared";
 export async function GET() {
   try {
     const identity = await pushIdentity(); if (!identity) return privateJson({ error: "Entre no portal para administrar notificações." }, 401);
+    const configuration = getPushConfiguration();
+    if (!configuration.configured) return privateJson({ configuration, publicKey: "", active: false, preferences: defaultPushPreferences });
     const admin = createSupabaseAdminClient(); const device = await currentDevice();
     const [prefs, sub] = await Promise.all([
       admin.from("push_preferences").select("used,reversed,low_balance,expiring").eq("client_id", identity.client_id).eq("organization_id", identity.organization_id).maybeSingle(),
       device ? admin.from("push_subscriptions").select("active").eq("device_hash", device.hash).eq("identity_id", identity.id).eq("user_id", identity.user_id).eq("client_id", identity.client_id).eq("organization_id", identity.organization_id).maybeSingle() : Promise.resolve({ data: null, error: null }),
     ]);
     if (prefs.error || sub.error) throw new Error("read_failed");
-    return privateJson({ active: sub.data?.active === true, preferences: prefs.data || defaultPushPreferences });
+    return privateJson({ configuration, publicKey: getPushPublicKey(), active: sub.data?.active === true, preferences: prefs.data || defaultPushPreferences });
   } catch { return privateJson({ error: "Não foi possível consultar as notificações. Tente novamente." }, 503); }
 }
 export async function POST(request: Request) {
   if (!sameOrigin(request)) return privateJson({ error: "Origem inválida." }, 403);
   try {
     const identity = await pushIdentity(); if (!identity) return privateJson({ error: "Entre no portal para ativar notificações." }, 401);
-    if (process.env.PUSH_ENABLED !== "true" || !process.env.VAPID_PRIVATE_KEY || !process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || !process.env.VAPID_SUBJECT) return privateJson({ error: "As notificações ainda não estão disponíveis neste ambiente." }, 503);
+    const configuration = getPushConfiguration();
+    if (!configuration.configured) return privateJson({ error: "Configuração do servidor incompleta.", configuration }, 503);
     let sub;
     try { sub = parsePushSubscription(await smallJson(request)); await resolvePushEndpoint(sub.endpoint); }
     catch { return privateJson({ error: "Assinatura inválida ou provedor de push não autorizado." }, 400); }

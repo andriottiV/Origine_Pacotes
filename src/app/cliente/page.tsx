@@ -8,6 +8,7 @@ import UsageHistory from "@/components/usage-history-view";
 import { loadUsageHistory } from "@/lib/usage-history";
 import { todayInSaoPaulo } from "@/lib/attendance";
 import ClientSignOut from "@/components/client-sign-out";
+import { getPushConfiguration, getPushPublicKey } from "@/lib/push/config";
 import PushSettings from "@/components/push-settings";
 import ClientSecurityForm from "./security-form";
 import PackageTicket from "../../components/package-ticket";
@@ -32,6 +33,7 @@ export default async function ClientPortal({ searchParams }: { searchParams: Pro
     loadUsageHistory(supabase, undefined, identity.client_id, historyPage),
   ]);
   const packages = packageResult.rows;
+  const pushConfiguration = getPushConfiguration();
   const client = Array.isArray(identity.clients) ? identity.clients[0] : identity.clients;
   const org = Array.isArray(identity.organizations) ? identity.organizations[0] : identity.organizations;
   return <main className="clients-page client-portal">
@@ -44,7 +46,7 @@ export default async function ClientPortal({ searchParams }: { searchParams: Pro
     <PageNavigation label="Seus pacotes" previous={packagePage ? pageHref('/cliente', params, 'packagePage', packagePage - 1) : undefined} next={packageResult.hasMore ? pageHref('/cliente', params, 'packagePage', packagePage + 1) : undefined} />
     <UsageHistory usages={history.rows} />
     <PageNavigation label="Seus usos" previous={historyPage ? pageHref('/cliente', params, 'historyPage', historyPage - 1) : undefined} next={history.hasMore ? pageHref('/cliente', params, 'historyPage', historyPage + 1) : undefined} />
-    <PushSettings publicKey={process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || ""} configured={process.env.PUSH_ENABLED === "true" && Boolean(process.env.VAPID_PRIVATE_KEY && process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_SUBJECT)} />
+    <PushSettings publicKey={pushConfiguration.configured ? getPushPublicKey() : ""} configuration={pushConfiguration} />
     <ClientSecurityForm />
   </main>;
 }

@@ -1,6 +1,8 @@
 "use client";
+import { isPushConfiguration, type PushConfiguration } from "./configuration";
+export class PushApiError extends Error { constructor(message: string, public status: number, public configuration?: PushConfiguration) { super(message); } }
 export function supportsPush() {
-  return window.isSecureContext && "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  return Boolean(window.isSecureContext && "serviceWorker" in navigator && typeof navigator.serviceWorker?.register === "function" && typeof navigator.serviceWorker?.getRegistration === "function" && "PushManager" in window && typeof Notification !== "undefined" && typeof Notification?.requestPermission === "function");
 }
 export function needsHomeScreen() {
   const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
@@ -37,7 +39,7 @@ export async function pushApi(path: string, method = "GET", value?: unknown) {
     const response = await fetch('/api/push/' + path, { method, credentials: "same-origin", cache: "no-store", signal: controller.signal,
       headers: value === undefined ? undefined : { "Content-Type": "application/json" }, body: value === undefined ? undefined : JSON.stringify(value) });
     const result = await response.json();
-    if (!response.ok) throw new Error(result.error || "Não foi possível atualizar as notificações.");
+    if (!response.ok) throw new PushApiError(result.error || "Não foi possível atualizar as notificações.", response.status, isPushConfiguration(result.configuration) ? result.configuration : undefined);
     return result;
   } finally { clearTimeout(timer); }
 }

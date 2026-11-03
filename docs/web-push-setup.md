@@ -205,3 +205,8 @@ CRON_SECRET; instalar o job periódico e conferir o plano/cotas/extensões; publ
 homologar com contas de teste em Chrome/Firefox/Edge/Safari e iPhone/iPad instalado;
 validar concorrência real entre conexões e falhas de rede ambíguas em infraestrutura
 publicada. Nenhuma assinatura, conta ou serviço real foi usado para envio de teste.
+
+
+## Diagnóstico de configuração
+
+Para bloqueio de ativação, diferenças entre build e runtime e mensagens distintas de suporte/API, consulte [web-push-diagnostics.md](web-push-diagnostics.md). A edição de variáveis na Vercel exige novo deployment; a chave pública exige também novo build. Não gere outro par VAPID para corrigir configuração de ambiente.
